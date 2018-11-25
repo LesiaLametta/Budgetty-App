@@ -9,14 +9,13 @@ var budgetController = (function() {
         this.percentage = -1;
     };
 
-    Expense.prototype.calculatePercentage = function(totalIncome) {
+    Expense.prototype.calcPercentage = function(totalIncome) {
 
         if (totalIncome > 0) {
-            this.percentage = Math.round((this.value / totalIncome) * 10);
+            this.percentage = Math.round((this.value / totalIncome) * 100);
         } else {
             this.percentage = -1;
         }
-
     };
 
 
@@ -39,8 +38,6 @@ var budgetController = (function() {
             sum += cur.value;
         });
         data.totals[type] = sum;
-
-
     };
 
     var data = {
@@ -137,7 +134,7 @@ var budgetController = (function() {
         calculatePercentages: function() {
 
             data.allItems.exp.forEach(function(cur) {
-                cur.calculatePercentage(data.totals.inc);
+                cur.calcPercentage(data.totals.inc);
             });
         },
 
